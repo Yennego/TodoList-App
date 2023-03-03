@@ -1,0 +1,129 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+
+
+const app = express();
+
+// app.use(express.urlencoded({extended: true}))
+
+app.get("/", function(req, res) {
+    // res.send("Server is running");
+
+    var today = new Date();
+    var currentDay = today.getDay();
+
+    if (currentDay === 6 || currentDay === 0) {
+        res.write("<h1>Yay it's the weekend!</h1>");
+    } else {
+        res.write("<h1>It's not the weekend!</h1>")
+        res.write("<p>goshhh! i have a working day!</p>")
+        res.send();
+    }
+});
+
+
+
+
+app.listen(3000, function() {
+    console.log("Server is running")
+});
+
+
+const express = require("express");
+const bodyParser = require("body-parser");
+
+
+const app = express();
+
+app.set('view engine', 'ejs'); 
+
+// app.use(express.urlencoded({extended: true}))
+
+app.get("/", function(req, res) {
+    // res.send("Server is running");
+
+    var today = new Date();
+    var currentDay = today.getDay();
+    var day = "";
+
+    switch (currentDay) {
+        case 0:
+            day = "sunday"
+            break;
+        case 1:
+            day = "Monday"
+            break;
+        case 2:
+            day = "Tuesday"
+            break;
+        case 3:
+            day = "Wednesday"
+            break;
+        case 4:
+            day = "Thursday"
+            break;
+        case 5:
+            day = "Friday"
+            break;
+        case 6:
+            day = "Saturday"
+            break;
+        default:
+        console.log(`Error: current day is equal to: ${currentDay}`);
+            
+    }
+
+
+    res.render("list", {
+        kindOfDay: day
+    });
+
+});
+    
+    
+
+app.listen(3000, function() {
+    console.log("Server is running")
+});
+
+
+ejs template//
+
+<% if (kindOfDay === "Saturday" || kindOfDay === "Sunday") { %>
+    <h1 style="color: purple"><%= kindOfDay %> Todo List</h1>
+<% } else { %>
+    <h1 style="color: blue"><%= kindOfDay %> Todo List</h1>
+<% } %>
+
+
+//jshint esversion:6
+
+module.exports.getDate = getDate;
+
+function getDate() {
+    let today = new Date();
+    
+   let options = {
+       weekday: "long",
+       day: "numeric",
+       month: "long",
+       year: "numeric"
+   };
+
+   return today.toLocaleDateString("en-US", options)
+
+}
+
+module.exports.getDay = getDay;
+
+function getDay() {
+    let today = new Date();
+    
+   let options = {
+       weekday: "long",
+   };
+
+   return today.toLocaleDateString("en-US", options)
+
+}
+   
